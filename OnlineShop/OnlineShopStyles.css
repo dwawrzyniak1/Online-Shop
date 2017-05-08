@@ -1,0 +1,50 @@
+﻿body
+{
+}
+#topstripe
+{
+    margin : 20px;
+    padding : 10px;
+}
+#shopname
+{
+    color : #4ddbff;
+    font-size : large;
+    font-family: 'Pacifico', cursive;
+}
+.option
+{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: medium;
+}
+.option:hover
+{
+    cursor: pointer;
+    color: #4ddbff;
+}
+#shopcontent
+{
+    margin: 50px;
+}
+.item
+{
+    float: left;
+    margin: 15px;
+    padding: 10px;
+    font-family: 'Annie Use Your Telescope', cursive;
+    text-align: center;
+}
+.itemname
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+.itemprize
+{
+    margin-bottom: 50px;
+}
+.itemimage
+{
+    width: 100%;
+    height: 100%;
+}
