@@ -35,30 +35,54 @@ $(document).ready(function (e) {
         prize: '30 pln',
         imageSource: 'http://www.popkiller.pl/sites/default/files/images/lona_i_webber.jpg'
     }];
-    var busket = [];
+    var basket = [];
     var moneyToPay = 0;
     function addItems() {
         for (i = 0; i < items.length; i++) {
             var img = "<img src=" + items[i].imageSource + " class=\"itemimage col-md-3\" />";
             var name = "<p class=\"itemname\">" + items[i].name + "</p>";
             var prize = "<p class=\"itemprize\">" + items[i].prize + "</p>";
-            var button = "<button class=\"itembutton\" id=\""+i+"\">Dodaj do koszyka</button>";
+            var button = "<button class=\"itembutton\" id=\"button"+i+"\">Dodaj do koszyka</button>";
             $("#shopcontent").append("<div class=\"item col-md-3\">" + img + name + prize + button + "</div>");
         }
     };
     function updateBasket() {
-        var stuff = busket.pop;
-        var name = "<p class=\"itemname\">" + stuff.name + "</p>";
-        var closeIcon = "<span class=\"closeicon\">&#10006;</span>";
-        $("#shopbusket").append(name + closeIcon);
-        $("#moneytopay").text("Money to pay: " + moneyToPay);
+        var stuff = basket.pop();
+        var closeIcon = "<span class=\"closeicon\"> &#10006;</span>";
+        var name = "<p class=\"itemname\">" + stuff.name + closeIcon + "</p>";       
+        $("#shopbusket, h3").after(name);
+        updateMoneyToPay();
     };
-    function addToBusket(index) {
-        busket.push(items[index]);
+    function addToBasket(index) {
+        basket.push(items[index]);
         var temp = items[index].prize.split(" ");
         moneyToPay += parseInt(temp[0]);
-        updateBusket();
+        updateBasket();
     };
+    function findInArray(itemName) {
+        for (i = 0; i < items.length; i++) {
+            if (itemName == items[i].name) {
+                return i;
+            }
+        }
+
+    };
+    function updateMoneyToPay() {
+        $("#moneytopay").text("Money to pay: " + moneyToPay + " pln");
+    }
     addItems();
-    $("#0").click(function () { addToBusket(0); });
+    $("button.itembutton").click(function(){
+        var boughtItemName = $(this).siblings("p.itemname").text();
+        addToBasket(findInArray(boughtItemName));
+    })  
+    $(document).on("click", ".closeicon", function () {
+        var parent = $(this).parent();
+        parent.children().remove();
+        text = parent.text();
+        parent.remove();
+        var index = findInArray(text);
+        var prize = items[index].prize.split(" ");
+        moneyToPay -= parseInt(prize[0]);
+        updateMoneyToPay();
+    });
 });
