@@ -50,7 +50,7 @@ $(document).ready(function (e) {
         var stuff = basket.pop();
         var closeIcon = "<span class=\"closeicon\"> &#10006;</span>";
         var name = "<p class=\"itemname\">" + stuff.name + closeIcon + "</p>";       
-        $("#shopbusket, h3").after(name);
+        $("#shopbasket h3").after(name);
         updateMoneyToPay();
     };
     function addToBasket(index) {
@@ -85,4 +85,29 @@ $(document).ready(function (e) {
         moneyToPay -= parseInt(prize[0]);
         updateMoneyToPay();
     });
+
+    var modal = $("#buymodal");
+    var modalbutton = $(".modalbutton");
+    var span = $(".close").eq(0);
+
+    modalbutton.eq(0).click(function () {
+        modal.css("display", "block");
+    });
+    span.click(function () {
+        modal.css("display", "none");
+    });
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.css("display", "none");
+        }
+    };
+    modalbutton.eq(1).click(function () {
+        modal.css("display", "none");
+        clearBasket();
+        moneyToPay = 0;
+        updateMoneyToPay();
+    })
+    function clearBasket() {
+        $("h3").siblings(".itemname").remove();
+    };
 });
