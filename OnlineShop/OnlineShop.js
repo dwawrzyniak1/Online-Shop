@@ -42,7 +42,7 @@ $(document).ready(function (e) {
             var img = "<img src=" + items[i].imageSource + " class=\"itemimage col-md-3\" />";
             var name = "<p class=\"itemname\">" + items[i].name + "</p>";
             var prize = "<p class=\"itemprize\">" + items[i].prize + "</p>";
-            var button = "<button class=\"itembutton\" id=\"button"+i+"\">Dodaj do koszyka</button>";
+            var button = "<button class=\"itembutton\" id=\"button"+i+"\">Add to basket</button>";
             $("#shopcontent").append("<div class=\"item col-md-3\">" + img + name + prize + button + "</div>");
         }
     };
